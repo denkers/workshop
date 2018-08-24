@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: aspnetapp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aspnetapp
+    spec:
+      containers:
+      - name: aspnetapp
+        image: registercontainer.azurecr.io/aspnetapp:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 500Mi
+      imagePullSecrets:
+      - name: acr-owner
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnetapp"
+  labels:
+    run: aspnetapp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: aspnetapp
