@@ -26,9 +26,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: aspnetapp
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-    service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "SubnetKuber"
   labels:
     run: aspnetapp
 spec:
